@@ -1,0 +1,26 @@
+{
+  "name": "quiz",
+  "version": "1.0.0",
+  "description": "quiz of liaoyuan",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Menq/LiaoYuanQuiz.git"
+  },
+  "keywords": [
+    "liaoyuan",
+    "quiz"
+  ],
+  "author": "mq",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Menq/LiaoYuanQuiz/issues"
+  },
+  "homepage": "https://github.com/Menq/LiaoYuanQuiz#readme",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
+}
