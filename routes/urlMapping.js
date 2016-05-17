@@ -44,7 +44,11 @@ router.post('/', function(req, res, next) {
 });
 
 function formUrl(model, req) {
-  model.shortUrl = req.hostname +':' + config.port + '/map/' + model.shortUrl;
+  if (config.port == 80) {
+     model.shortUrl = req.hostname + '/map/' + model.shortUrl;
+  }else{
+     model.shortUrl = req.hostname +':' + config.port + '/map/' + model.shortUrl;
+  }
   return model;
 }
 

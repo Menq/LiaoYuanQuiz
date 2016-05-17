@@ -28,7 +28,7 @@ module.exports.generateKeys = function generateKeys(keyNumber) {
           keys.splice(number, 1);
         }
         Keys.create({'index': j, 'keys': newArray}, function(err, model){
-          console.log(model);
+          // console.log(model);
           globalKeysArray.push(model);
         });
       }
