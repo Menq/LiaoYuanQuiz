@@ -24,7 +24,11 @@
                 });
             console.log(param);
             $http.post("/urlmapping/", param).success(function(data, status) {
-                $scope.data = data;
+                if (data.error) {
+                  alert(data.error);
+                }else{
+                  $scope.data = data;
+                }
             })
           };
         })

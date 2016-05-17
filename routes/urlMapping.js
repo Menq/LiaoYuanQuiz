@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var utils = require('../bin/utils');
 
 var mongoose = require('mongoose');
 var UrlMapping = require('../model/UrlMapping');
@@ -12,7 +13,12 @@ router.get('/:short_url', function (req, res) {
     // console.log(req.url);
     // var fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
     // console.log(fullUrl);
-    res.redirect(urlmapping.raw);
+    if (urlmapping) {
+      var   url = 'http://' + urlmapping.raw;
+      res.redirect(301, url);
+    }else{
+      res.redirect('/404');
+    }
   });
 });
 
@@ -21,7 +27,7 @@ router.post('/', function(req, res, next) {
   UrlMapping.count({}, function(err, count){
     UrlMapping.create({'shortUrl': count.toString() , 'raw': raw}, function(err,model){
       if (err) { return next(err) }
-      res.json(model);
+        res.json(model);
     });
   });
 });
