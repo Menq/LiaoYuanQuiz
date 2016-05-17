@@ -2,7 +2,7 @@
   "name": "quiz",
   "version": "1.0.0",
   "description": "quiz of liaoyuan",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "test"
   },
@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/Menq/LiaoYuanQuiz#readme",
   "dependencies": {
-    "express": "^4.13.4"
+    "express": "^4.13.4",
+    "mongoose": "^4.4.17"
   }
 }
