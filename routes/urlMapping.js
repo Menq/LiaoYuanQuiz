@@ -22,18 +22,30 @@ router.get('/:short_url', function (req, res) {
 
 router.post('/', function(req, res, next) {
   var raw = req.body.raw;
-  UrlMapping.count({}, function(err, count){
-    var shortUrl = utils.generateShortUrl(count + 1);
-    if (!shortUrl) {
-      res.json({"error": "generate url fail"});
+  UrlMapping.findOne({'raw': raw}, function(err, model){
+    if (err) {
+      return next(err);
+    }else if(model){
+      res.json(formUrl(model, req));
     }else{
-      UrlMapping.create({'shortUrl': shortUrl, 'raw': raw}, function(err,model){
-        if (err) { return next(err) }
-          model.shortUrl = req.hostname +':' + config.port + '/map/' + shortUrl;
-          res.json(model);
+      UrlMapping.count({}, function(err, count){
+        var shortUrl = utils.generateShortUrl(count + 1);
+        if (!shortUrl) {
+          res.json({"error": "generate url fail"});
+        }else{
+          UrlMapping.create({'shortUrl': shortUrl, 'raw': raw}, function(err,model){
+            if (err) { return next(err) }
+              res.json(formUrl(model, req));
+          });
+        }
       });
     }
   });
 });
+
+function formUrl(model, req) {
+  model.shortUrl = req.hostname +':' + config.port + '/map/' + model.shortUrl;
+  return model;
+}
 
 module.exports = router;
