@@ -1,5 +1,8 @@
 module.exports = {
     "db": {
         "mongodb": "mongodb://localhost/Quiz",
+    },
+    "indexView": {
+        "title" : "短域名服务",
     }
 };

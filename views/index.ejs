@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-app="app">
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <div ng-controller="myCtrl">
+      <form ng-submit="sendPost()" ng-style="stylesheet.form">
+        <textarea ng-model="rawUrl" class="input"></textarea>
+        <button type="submit">生成短网址</button>
+      </form>
+      <h1 class="result">{{data.shortUrl}}</h1>
+    </div>
+    <script>
+      angular.module('app', [])
+        .controller('myCtrl', function ($scope, $http) {
+          $scope.sendPost = function() {
+            var param = JSON.stringify({
+                    raw: $scope.rawUrl
+                });
+            console.log(param);
+            $http.post("/urlmapping/", param).success(function(data, status) {
+                $scope.data = data;
+            })
+          };
+        })
+    </script>
+  </body>
+</html>
+
+
+

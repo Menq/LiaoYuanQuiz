@@ -1,30 +1,34 @@
 var express = require('express');
 var mongoose = require('mongoose');
+var path = require('path');
 var config = require('./config');
+var cookiePatset = require('cookie-parser');
+var bodyParser = require('body-parser');
+
+var routes = require('./routes/index.js');
+var urlMapping = require('./routes/urlMapping.js');
 
 mongoose.connect(config.db.mongodb);
 
-var UrlMapping = mongoose.model('UrlMappingModel',{
-  shortUrl: String,
-  raw: String,
-});
-
 var app = express();
 
-app.get('/api/urlMapping/:short_url', function (req, res) {
-  UrlMapping.findOne({'shortUrl': req.params.short_url}, 'shortUrl raw',function(err, urlmapping){
-    if (err) {
-      res.send(err);
-    }
-    console.log(req.url);
-    var fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
-    console.log(urlmapping);
-    res.redirect(urlmapping.raw);
-  });
-});
+app.use( bodyParser.json() );       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+  extended: true
+}));
 
-// app.get('*', function(req, res) {
-//     res.sendfile('./public/index.html'); // load the single view file (angular will handle the page changes on the front-end)
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+app.use(express.static(path.join(__dirname, 'public')));
+
+
+app.use('/', routes);
+app.use('/urlmapping', urlMapping);
+
+// app.use(function(req, res, next) {
+//   var err = new Error('not Found');
+//   err.status = 404;
+//   next(err);
 // });
 
 app.listen(3000, function () {
