@@ -32,7 +32,7 @@ app.use('/map', urlMapping);
 //   next(err);
 // });
 
-app.listen(3000, function () {
+app.listen(config.port, function () {
   console.log('Example app listening on port 3000!');
 });
 
