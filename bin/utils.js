@@ -1,5 +1,4 @@
 var Keys = require('../Model/Keys');
-var _ = require('underscore');
 
 var globalKeysArray = [];
 

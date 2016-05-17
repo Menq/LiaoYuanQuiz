@@ -4,7 +4,7 @@ var utils = require('../bin/utils');
 var config = require('../config');
 
 var mongoose = require('mongoose');
-var UrlMapping = require('../model/UrlMapping');
+var UrlMapping = require('../Model/UrlMapping');
 
 router.get('/:short_url', function (req, res) {
   UrlMapping.findOne({'shortUrl': req.params.short_url}, 'shortUrl raw',function(err, urlmapping){
