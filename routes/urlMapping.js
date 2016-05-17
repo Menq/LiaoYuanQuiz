@@ -10,11 +10,8 @@ router.get('/:short_url', function (req, res) {
     if (err) {
       res.send(err);
     }
-    // console.log(req.url);
-    // var fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
-    // console.log(fullUrl);
     if (urlmapping) {
-      var   url = 'http://' + urlmapping.raw;
+      var url = 'http://' + urlmapping.raw;
       res.redirect(301, url);
     }else{
       res.redirect('/404');

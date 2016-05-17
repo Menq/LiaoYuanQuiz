@@ -4,11 +4,13 @@ var path = require('path');
 var config = require('./config');
 var cookiePatset = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var utils = require('./bin/utils');
 var routes = require('./routes/index.js');
 var urlMapping = require('./routes/urlMapping.js');
 
-mongoose.connect(config.db.mongodb);
+var db = mongoose.connect(config.db.mongodb, function(err){
+    utils.generateKeys(config.keysLength);
+});
 
 var app = express();
 
@@ -21,9 +23,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
 
-
 app.use('/', routes);
-app.use('/urlmapping', urlMapping);
+app.use('/map', urlMapping);
 
 // app.use(function(req, res, next) {
 //   var err = new Error('not Found');

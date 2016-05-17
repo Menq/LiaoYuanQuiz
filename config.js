@@ -4,5 +4,6 @@ module.exports = {
     },
     "indexView": {
         "title" : "短域名服务",
-    }
+    },
+    "keysLength": 6
 };

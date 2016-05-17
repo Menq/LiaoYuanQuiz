@@ -23,7 +23,7 @@
                     raw: $scope.rawUrl
                 });
             console.log(param);
-            $http.post("/urlmapping/", param).success(function(data, status) {
+            $http.post("/map/", param).success(function(data, status) {
                 if (data.error) {
                   alert(data.error);
                 }else{
