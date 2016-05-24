@@ -6,5 +6,5 @@ module.exports = {
         "title" : "短域名服务",
     },
     "keysLength": 5,
-    port: 80
+    port: 3000
 };
