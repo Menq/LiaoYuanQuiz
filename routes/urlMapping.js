@@ -13,7 +13,7 @@ router.get('/:short_url', function (req, res) {
     }
     if (urlmapping) {
       var url;
-      if(urlmapping.raw.startsWith('http')){
+      if(!urlmapping.raw.startsWith('http')){
         url = 'http://' + urlmapping.raw;
       }else{
         url = urlmapping.raw;
