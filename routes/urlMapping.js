@@ -12,7 +12,12 @@ router.get('/:short_url', function (req, res) {
       res.send(err);
     }
     if (urlmapping) {
-      var url = 'http://' + urlmapping.raw;
+      var url;
+      if(urlmapping.raw.startsWith('http')){
+        url = 'http://' + urlmapping.raw;
+      }else{
+        url = urlmapping.raw;
+      }
       res.redirect(301, url);
     }else{
       res.redirect('/404');
